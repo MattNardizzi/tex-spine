@@ -44,7 +44,7 @@ extend({ BeamMaterial })
 
 export function BeamRenderer() {
   const meshRef = useRef<THREE.Mesh>(null)
-  const materialRef = useRef<any>()
+  const materialRef = useRef<THREE.ShaderMaterial | null>(null)
 
   useFrame(({ clock }) => {
     if (materialRef.current) {
