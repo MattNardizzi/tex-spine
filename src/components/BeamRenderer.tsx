@@ -6,7 +6,7 @@ import { useFrame } from '@react-three/fiber'
 import { shaderMaterial } from '@react-three/drei'
 import { extend } from '@react-three/fiber'
 
-// ✅ Shader code inlined as raw strings (no plugin)
+// ✅ Shader strings (no glsl macro needed)
 const vertexShader = `
   varying vec2 vUv;
   uniform float time;
@@ -42,9 +42,12 @@ const BeamMaterial = shaderMaterial(
 
 extend({ BeamMaterial })
 
+// ✅ Fix type for materialRef to include 'time'
+type BeamMaterialType = THREE.ShaderMaterial & { time: number }
+
 export function BeamRenderer() {
   const meshRef = useRef<THREE.Mesh>(null)
-  const materialRef = useRef<THREE.ShaderMaterial | null>(null)
+  const materialRef = useRef<BeamMaterialType | null>(null)
 
   useFrame(({ clock }) => {
     if (materialRef.current) {
