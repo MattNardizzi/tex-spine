@@ -8,7 +8,7 @@ import * as THREE from 'three'
 
 function ShadowAura() {
   const meshRef = useRef<THREE.Mesh>(null)
-  const materialRef = useRef<any>(null)
+  const materialRef = useRef<THREE.ShaderMaterial | null>(null)
 
   useFrame(({ clock }) => {
     if (materialRef.current) {
